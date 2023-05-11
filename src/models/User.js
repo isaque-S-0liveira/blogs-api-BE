@@ -8,7 +8,10 @@ const UserSchema = (sequelize, DataTypes) => {
     const userTable = sequelize.define(
         'User',
         {
-         id: DataTypes.INTEGER,
+         id: {
+           type: DataTypes.INTEGER,
+           primaryKey:true,
+         },
          displayName: DataTypes.STRING,
          email: DataTypes.STRING,
          password: DataTypes.STRING,
@@ -20,12 +23,12 @@ const UserSchema = (sequelize, DataTypes) => {
             underscored: true,
         },
     );
-    userTable.associate = (models) => {
-        userTable.hasMany(models.BlogPost, {
-            foreignKey: 'userId',
-            as: 'blogPosts'
-        })
-    }
+    // userTable.associate = (models) => {
+    //     userTable.hasMany(models.BlogPost, {
+    //         foreignKey: 'userId',
+    //         as: 'blogPosts'
+    //     })
+    // }
 
     return userTable;
 

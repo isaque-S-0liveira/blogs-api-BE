@@ -14,10 +14,12 @@ module.exports = {
       field: 'display_name',
     },
     email: {
+      allowNull: false,
       type: Sequelize.STRING,
       unique: true
     },
     password: {
+      allowNull: false,
       type: Sequelize.STRING,
     },
     image: {
