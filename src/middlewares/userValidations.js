@@ -36,8 +36,19 @@ const validateCreatUser = async (req, res, next) => {
     next();
 };
 
+const validateId = async (req, res, next) => {
+   const { id } = req.params;
+   const allUsers = await userService.getUser();
+   const trueID = allUsers.find((el) => el.id === Number(id));
+   if (!trueID) {
+    return res.status(404).json({ message: 'User does not exist' });
+   }
+  next();
+};
+
 module.exports = {
     validateLogin,
     validateUser,
     validateCreatUser,
+    validateId,
 };

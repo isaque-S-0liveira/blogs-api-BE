@@ -7,8 +7,10 @@ const jwtConfig = {
     algorithm: 'HS256',
   };
 
-const token = (data) => jwt.sign({ data }, secret, jwtConfig);
+const generateToken = (data) => jwt.sign({ data }, secret, jwtConfig);
+const verifyToken = (token) => jwt.verify(token, secret);
 
 module.exports = {
-    token,
+    generateToken,
+    verifyToken,
 };
