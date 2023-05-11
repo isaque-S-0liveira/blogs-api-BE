@@ -6,13 +6,15 @@ const creatUser = async (req, res) => {
 
     await userService.creatUser(displayName, email, password, image);
 
-    const token = authToken.generateToken(email);
+    const token = authToken.generateToken(displayName, email, password, image);
     return res.status(201).json({ token });
 };
 
 const LoginUser = async (req, res) => {
    const { email } = req.body;
-   const token = authToken.generateToken(email);
+   const { id } = await userService.loginUser(email);
+   console.log(id);
+   const token = authToken.generateToken(id);
    return res.status(200).json({ token });
 };
 

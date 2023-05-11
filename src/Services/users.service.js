@@ -9,6 +9,13 @@ const creatUser = (displayName, email, password, image) => User.create({
 
 const getEmail = (email) => User.findOne({ where: { email } });
 
+const loginUser = (email) => {
+    const user = User.findOne({
+        where: { email },
+    });
+    return user;
+};
+
 const getUser = () => User.findAll({
     attributes: { exclude: ['password'] },
 });
@@ -26,4 +33,5 @@ module.exports = {
     getEmail,
     getUser,
     getUserById,
+    loginUser,
 };
