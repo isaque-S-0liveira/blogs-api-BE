@@ -9,15 +9,15 @@ const CategorySchema = (sequelize, DataTypes) => {
         'Category',
         {
          id: {
+            primaryKey:true,
+            autoIncrement: true, 
            type: DataTypes.INTEGER,
-           primaryKey:true,
          },
          name: DataTypes.STRING,
         },
         {
             tableName: 'categories',
             timestamps: false,
-            underscored: true,
         },
     );
     return categoryTable;
