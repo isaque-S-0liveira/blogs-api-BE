@@ -20,6 +20,7 @@ const CategorySchema = (sequelize, DataTypes) => {
             timestamps: false,
         },
     );
+
     return categoryTable;
 }
 
