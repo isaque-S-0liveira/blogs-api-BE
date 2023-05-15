@@ -1,4 +1,4 @@
-const { categoryIdValidation } = require('../Services/blogPosts.service');
+const { categoryIdValidation, blogPostIdValidation } = require('../Services/blogPosts.service');
 
 const postCategoriesValidate = (req, res, next) => {
     const { title, content, categoryIds } = req.body;
@@ -18,4 +18,14 @@ const categoryIdValidate = async (req, res, next) => {
     next();
 };
 
-module.exports = { postCategoriesValidate, categoryIdValidate };
+const blogPostIdValidate = async (req, res, next) => {
+    const { id } = req.params;
+    const validate = await blogPostIdValidation(id);
+    if (!validate) {
+        return res.status(404).json({ message: 'Post does not exist' });
+    }
+    console.log(validate);
+    next();
+};
+
+module.exports = { postCategoriesValidate, categoryIdValidate, blogPostIdValidate };

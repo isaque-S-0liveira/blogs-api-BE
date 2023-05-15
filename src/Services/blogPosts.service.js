@@ -8,6 +8,8 @@ const categoryIdValidation = async (categoryIds) => {
    return validation;
 };
 
+const blogPostIdValidation = (id) => BlogPost.findByPk(id);
+
 const creatPostAndCategory = async ({ title, content, categoryIds }, userId) => {
     const blogPost = await BlogPost.create({
         title,
@@ -36,8 +38,18 @@ const getAllBlogPosts = () => BlogPost.findAll({
 ],
 }); 
 
+const getByIdBlogPost = (id) => BlogPost.findOne({ 
+  where: { id },
+  include: [
+    { model: User, as: 'user', attributes: { exclude: ['password'] } },
+    { model: Category, as: 'categories', through: { attributes: [] } },
+],
+});
+
 module.exports = { 
   creatPostAndCategory, 
   categoryIdValidation, 
   getAllBlogPosts,
+  getByIdBlogPost,
+  blogPostIdValidation,
 };

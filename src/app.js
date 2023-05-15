@@ -11,7 +11,8 @@ const validateJWT = require('./middlewares/validateJWT');
 const { validateName } = require('./middlewares/categoryValidations');
 const { 
   postCategoriesValidate, 
-  categoryIdValidate } = require('./middlewares/postCategoriesValidations');
+  categoryIdValidate, 
+  blogPostIdValidate } = require('./middlewares/postCategoriesValidations');
 
 const app = express();
 
@@ -44,6 +45,7 @@ blogPostController.creatPostAndCategory,
 
 app.get('/post', validateJWT, blogPostController.getAllBlogPosts);
 
+app.get('/post/:id', validateJWT, blogPostIdValidate, blogPostController.getByIdBlogPost);
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`
 module.exports = app;
