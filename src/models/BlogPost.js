@@ -15,10 +15,7 @@ const BlogPostSchema = (sequelize, DataTypes) => {
          },
          title: DataTypes.STRING,
          content: DataTypes.STRING,
-         userId: {
-            type: DataTypes.INTEGER,
-            foreignKey: true
-         },
+         userId: DataTypes.INTEGER,
          published: {
             type: DataTypes.DATE,
             field: 'published', 
@@ -30,7 +27,7 @@ const BlogPostSchema = (sequelize, DataTypes) => {
         },
         {
             tableName: 'blog_posts',
-            timestamps: true,
+            timestamps: false,
             underscored: true
         },
     );

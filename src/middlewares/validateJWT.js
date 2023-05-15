@@ -9,8 +9,8 @@ const validateJWT = (req, res, next) => {
     
     const data = verifyToken(authorization);
     req.payload = data;
-    
-    next();
+    console.log('payload', data);
+        next();
     } catch (error) {
         return res.status(401).json({ message: 'Expired or invalid token' });
     }
