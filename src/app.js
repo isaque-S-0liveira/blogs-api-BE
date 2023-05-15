@@ -42,6 +42,8 @@ app.post(
 blogPostController.creatPostAndCategory,
 );
 
+app.get('/post', validateJWT, blogPostController.getAllBlogPosts);
+
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`
 module.exports = app;

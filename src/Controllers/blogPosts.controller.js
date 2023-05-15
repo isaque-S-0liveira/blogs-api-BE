@@ -6,6 +6,12 @@ const creatPostAndCategory = async (req, res) => {
      return res.status(201).json(blogPost);
 };
 
+const getAllBlogPosts = async (__req, res) => {
+    const allBlogPosts = await blogPostService.getAllBlogPosts();
+    return res.status(200).json(allBlogPosts);
+};
+
 module.exports = {
     creatPostAndCategory,
+    getAllBlogPosts,
 };
