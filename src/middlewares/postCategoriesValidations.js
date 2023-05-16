@@ -32,9 +32,11 @@ const validateAuthUser = async (req, res, next) => {
     const { id } = req.params;
     const { data } = req.payload;
     const blogPost = await blogPostService.getByIdBlogPost(id);
-    if (blogPost.id !== data) {
+    if (blogPost.userId !== data) {
+        console.log('deu ruim', blogPost.id, data);
         return res.status(401).json({ message: 'Unauthorized user' });
     }
+    console.log('deu bom', blogPost.id, data);
     next();
 }; 
 

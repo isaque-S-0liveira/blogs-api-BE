@@ -52,6 +52,8 @@ BlogPost.update(
    { where: { id } },
   );
 
+const deletePost = (id) => BlogPost.destroy({ where: { id } });  
+
 module.exports = { 
   creatPostAndCategory, 
   categoryIdValidation, 
@@ -59,4 +61,5 @@ module.exports = {
   getByIdBlogPost,
   blogPostIdValidation,
   updatedPost,
+  deletePost,
 };
