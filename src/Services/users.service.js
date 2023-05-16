@@ -28,10 +28,13 @@ const getUserById = (id) => {
     return user;
 };
 
+const deleteUser = (id) => User.destroy({ where: { id } }); 
+
 module.exports = {
     creatUser,
     getEmail,
     getUser,
     getUserById,
     loginUser,
+    deleteUser,
 };

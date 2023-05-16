@@ -65,6 +65,8 @@ app.delete(
  validateAuthUser, 
  blogPostController.deletePost,
 );
+
+app.delete('/user/me', validateJWT, userController.deleteUser);
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`
 module.exports = app;
