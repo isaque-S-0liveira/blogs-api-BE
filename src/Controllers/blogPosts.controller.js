@@ -31,10 +31,18 @@ const deletePost = async (req, res) => {
     return res.status(204).end();
 };
 
+const seachPost = async (req, res) => {
+    const term = req.query.q;
+    console.log(term);
+    const posts = await blogPostService.seachPost(term);
+    return res.status(200).json(posts);
+};
+
 module.exports = {
     creatPostAndCategory,
     getAllBlogPosts,
     getByIdBlogPost,
     updatedPost,
     deletePost,
+    seachPost,
 };

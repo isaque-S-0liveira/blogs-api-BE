@@ -48,6 +48,8 @@ blogPostController.creatPostAndCategory,
 
 app.get('/post', validateJWT, blogPostController.getAllBlogPosts);
 
+app.get('/post/search', validateJWT, blogPostController.seachPost);
+
 app.get('/post/:id', validateJWT, blogPostIdValidate, blogPostController.getByIdBlogPost);
 
 app.put(
@@ -67,6 +69,7 @@ app.delete(
 );
 
 app.delete('/user/me', validateJWT, userController.deleteUser);
+
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`
 module.exports = app;
