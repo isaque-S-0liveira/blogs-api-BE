@@ -1,4 +1,4 @@
-const { categoryIdValidation, blogPostIdValidation } = require('../Services/blogPosts.service');
+const blogPostService = require('../Services/blogPosts.service');
 
 const postCategoriesValidate = (req, res, next) => {
     const { title, content, categoryIds } = req.body;
@@ -10,7 +10,7 @@ const postCategoriesValidate = (req, res, next) => {
 
 const categoryIdValidate = async (req, res, next) => {
     const { categoryIds } = req.body;
-    const validate = await categoryIdValidation(categoryIds);
+    const validate = await blogPostService.categoryIdValidation(categoryIds);
     const hasNull = validate.some((category) => category === null);
     if (hasNull) {
         return res.status(400).json({ message: 'one or more "categoryIds" not found' });
@@ -20,7 +20,7 @@ const categoryIdValidate = async (req, res, next) => {
 
 const blogPostIdValidate = async (req, res, next) => {
     const { id } = req.params;
-    const validate = await blogPostIdValidation(id);
+    const validate = await blogPostService.blogPostIdValidation(id);
     if (!validate) {
         return res.status(404).json({ message: 'Post does not exist' });
     }
@@ -28,4 +28,28 @@ const blogPostIdValidate = async (req, res, next) => {
     next();
 };
 
-module.exports = { postCategoriesValidate, categoryIdValidate, blogPostIdValidate };
+const validateAuthUser = async (req, res, next) => {
+    const { id } = req.params;
+    const { data } = req.payload;
+    const blogPost = await blogPostService.getByIdBlogPost(id);
+    if (blogPost.id !== data) {
+        return res.status(401).json({ message: 'Unauthorized user' });
+    }
+    next();
+}; 
+
+const blogPostUpdatedValidate = (req, res, next) => {
+    const { title, content } = req.body;
+    if (!title || !content) {
+        return res.status(400).json({ message: 'Some required fields are missing' });
+    }
+    next();
+};
+
+module.exports = { 
+    postCategoriesValidate, 
+    categoryIdValidate, 
+    blogPostIdValidate, 
+    validateAuthUser,
+    blogPostUpdatedValidate,
+};
